@@ -49,7 +49,6 @@
                 <option>Terbaru</option>
                 <option>Terpopuler</option>
                 <option>A-Z</option>
-                <option>Terbanyak Diunduh</option>
             </select>
 
             {{-- View toggle --}}

@@ -29,11 +29,11 @@
                     <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-[#DC2626] to-[#B91C1C] flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform">
                         <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
                     </div>
-                    <span class="font-['Poppins'] font-bold text-[#DC2626] text-lg">BahanAjar</span>
+                    <span class="font-['Poppins'] font-bold text-[#DC2626] text-lg">SIKAP BERJASA</span>
                 </a>
                 {{-- Desktop Nav --}}
                 <div class="hidden md:flex items-center gap-1">
-                    @foreach([['route' => 'home', 'label' => 'Beranda'], ['route' => 'tentang', 'label' => 'Tentang'], ['route' => 'materi', 'label' => 'Materi'], ['route' => 'profil', 'label' => 'Profil'], ['route' => 'kontak', 'label' => 'Kontak']] as $item)
+                    @foreach([['route' => 'home', 'label' => 'Home'], ['route' => 'peraturan', 'label' => 'Peraturan PBJ'], ['route' => 'materi', 'label' => 'Informasi'], ['route' => 'materi', 'label' => 'Dokumen'], ['route' => 'kontak', 'label' => 'Aplikasi PBJ']] as $item)
                     <a href="{{ route($item['route']) }}"
                        class="px-4 py-2 rounded-lg text-sm font-medium transition-all hover:bg-[#FEF2F2] hover:text-[#DC2626] dark:hover:bg-[#7F1D1D]/20 {{ request()->routeIs($item['route']) ? 'bg-[#FEF2F2] text-[#DC2626] dark:bg-[#7F1D1D]/20' : 'text-[#6B7280] dark:text-[#9CA3AF]' }}">
                         {{ $item['label'] }}
