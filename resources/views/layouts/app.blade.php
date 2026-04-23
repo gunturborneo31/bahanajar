@@ -17,6 +17,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @stack('head')
 </head>
+{{-- ini hanya sebuah komentar --}}
 <body class="bg-[#F9FAFB] dark:bg-[#111827] text-[#111827] dark:text-[#F3F4F6] font-['Inter'] antialiased transition-colors duration-300">
 
     {{-- Navbar (only on non-home pages) --}}
