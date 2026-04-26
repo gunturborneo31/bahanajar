@@ -68,7 +68,7 @@
                 <ul class="space-y-1">
                     <template x-for="cat in kategoriList" :key="cat.nama">
                         <li>
-                            <button @click="kategori = cat.nama"
+                            <button @click="kategori = cat.nama; selectedArticle = null"
                                 class="w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-medium transition-all duration-150 hover:bg-[#FEF2F2] dark:hover:bg-[#7F1D1D]/20 hover:text-[#DC2626] focus:outline-none"
                                 :class="kategori === cat.nama ? 'bg-[#FEF2F2] dark:bg-[#7F1D1D]/20 text-[#DC2626]' : 'text-[#374151] dark:text-[#D1D5DB] bg-transparent'">
                                 <span x-text="cat.nama"></span>
