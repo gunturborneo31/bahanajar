@@ -16,6 +16,13 @@
     },
     "dependencies": {
         "@alpinejs/collapse": "^3.15.11",
-        "alpinejs": "^3.15.11"
+        "@fullcalendar/core": "^6.1.20",
+        "@fullcalendar/daygrid": "^6.1.20",
+        "@fullcalendar/interaction": "^6.1.20",
+        "@fullcalendar/list": "^6.1.20",
+        "@fullcalendar/timegrid": "^6.1.20",
+        "@glidejs/glide": "^3.7.1",
+        "alpinejs": "^3.15.11",
+        "swiper": "^11.0.0"
     }
 }

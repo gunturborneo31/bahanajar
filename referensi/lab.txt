@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface-variant": "#444653",
+                        "secondary": "#006c49",
+                        "surface-container-low": "#eff4ff",
+                        "tertiary": "#303539",
+                        "secondary-fixed-dim": "#4edea3",
+                        "primary-container": "#1e40af",
+                        "error-container": "#ffdad6",
+                        "surface-tint": "#3755c3",
+                        "on-primary-fixed-variant": "#173bab",
+                        "tertiary-container": "#474c4f",
+                        "on-secondary-container": "#00714d",
+                        "on-secondary-fixed": "#002113",
+                        "on-primary-container": "#a8b8ff",
+                        "primary-fixed": "#dde1ff",
+                        "tertiary-fixed-dim": "#c3c7cb",
+                        "on-surface": "#0d1c2e",
+                        "on-secondary": "#ffffff",
+                        "on-secondary-fixed-variant": "#005236",
+                        "on-error-container": "#93000a",
+                        "surface-bright": "#f8f9ff",
+                        "surface": "#f8f9ff",
+                        "on-tertiary-container": "#b8bcc0",
+                        "inverse-on-surface": "#eaf1ff",
+                        "background": "#f8f9ff",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-dim": "#ccdbf3",
+                        "on-error": "#ffffff",
+                        "inverse-primary": "#b8c4ff",
+                        "inverse-surface": "#233144",
+                        "primary-fixed-dim": "#b8c4ff",
+                        "on-primary": "#ffffff",
+                        "surface-container-high": "#dce9ff",
+                        "on-background": "#0d1c2e",
+                        "outline-variant": "#c4c5d5",
+                        "primary": "#00288e",
+                        "surface-container": "#e6eeff",
+                        "secondary-container": "#6cf8bb",
+                        "surface-container-highest": "#d5e3fc",
+                        "error": "#ba1a1a",
+                        "outline": "#757684",
+                        "on-tertiary-fixed": "#171c1f",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-fixed": "#dfe3e7",
+                        "on-primary-fixed": "#001453",
+                        "surface-variant": "#d5e3fc",
+                        "on-tertiary-fixed-variant": "#43474b",
+                        "secondary-fixed": "#6ffbbe"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-sm": "8px",
+                        "container-max": "1280px",
+                        "gutter": "24px",
+                        "unit": "8px",
+                        "stack-md": "16px",
+                        "stack-lg": "32px",
+                        "margin-page": "40px"
+                    },
+                    "fontFamily": {
+                        "h1": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "label-sm": ["Plus Jakarta Sans"],
+                        "h3": ["Plus Jakarta Sans"],
+                        "h2": ["Plus Jakarta Sans"],
+                        "caption": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "h1": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "label-sm": ["14px", {"lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "h3": ["24px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                        "h2": ["32px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "caption": ["12px", {"lineHeight": "1.4", "fontWeight": "500"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 20px -5px rgba(30, 64, 175, 0.08);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #f8f9ff;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+    </style>
+</head>
+<body class="min-h-screen text-on-surface">
+<!-- TopNavBar -->
+<header class="bg-white/70 backdrop-blur-xl dark:bg-slate-900/70 text-sm font-medium font-['Plus_Jakarta_Sans'] docked full-width top-0 sticky z-50 border-b border-white/20 dark:border-slate-800/50 shadow-[0_4px_20px_-5px_rgba(30,64,175,0.08)] flex justify-between items-center px-8 py-4 w-full">
+<div class="flex items-center gap-8">
+<span class="text-xl font-extrabold tracking-tighter text-blue-900 dark:text-blue-100">LAB LPSE</span>
+<nav class="hidden md:flex gap-6">
+<a class="text-blue-700 dark:text-blue-400 border-b-2 border-blue-700 dark:border-blue-400 pb-1 hover:text-blue-600 transition-colors" href="#">Dashboard</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-blue-600 transition-colors" href="#">Calendar</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-blue-600 transition-colors" href="#">Registration</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-slate-500 hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 text-slate-500 hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+</button>
+<img alt="User profile" class="w-8 h-8 rounded-full border border-primary/20" data-alt="professional portrait of a government official in a clean white background with soft studio lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3uobmP6uQt4AnxPL-5BWsPw6FE3lD2aXIsfRNDof5fBe2UIg5GNuZZGRhVgQ-Zb6gVs46CpGWOZsZD9qTJUqJZlnOPAXYeC4_7SWuY8JoXTX8IxfPia3Dm1Xh4YRI0OiGmHJJ-U5xphJSFTsMzXPphX-fyGcf1UaZqXEIId6k4ace7ctjX1HGgusAZW4VHhl3jkgSTr7JzeSKZkGqKywUK2BO25o8uSZPzy-pA6pbF90u8lFhHU_zHESfvhfXJPEre9GyEb09vDY"/>
+</div>
+</header>
+<main class="max-w-[1440px] mx-auto px-margin-page py-stack-lg space-y-stack-lg">
+<!-- Header Filters -->
+<section class="glass-card rounded-2xl p-6 flex flex-wrap items-end gap-6">
+<div class="flex-1 min-w-[200px]">
+<label class="block font-label-sm text-on-surface-variant mb-2">Jenis Pelatihan</label>
+<select class="w-full bg-slate-50 border-outline-variant rounded-lg focus:ring-primary focus:border-primary text-body-md">
+<option>Semua Jenis</option>
+<option>PBJP Dasar</option>
+<option>Sertifikasi Ahli</option>
+<option>Manajemen Kontrak</option>
+</select>
+</div>
+<div class="flex-1 min-w-[200px]">
+<label class="block font-label-sm text-on-surface-variant mb-2">Bulan Pelaksanaan</label>
+<div class="relative">
+<input class="w-full bg-slate-50 border-outline-variant rounded-lg focus:ring-primary focus:border-primary text-body-md" type="month" value="2024-05"/>
+</div>
+</div>
+<div class="flex-1 min-w-[200px]">
+<label class="block font-label-sm text-on-surface-variant mb-2">Metode</label>
+<div class="flex gap-2">
+<button class="flex-1 py-2 px-4 rounded-lg bg-primary text-white font-label-sm transition-all active:scale-95">Online</button>
+<button class="flex-1 py-2 px-4 rounded-lg bg-surface-container-high text-on-surface-variant font-label-sm hover:bg-surface-container-highest transition-all">Offline</button>
+</div>
+</div>
+<button class="bg-primary text-white p-2.5 rounded-lg hover:bg-primary-container transition-all flex items-center gap-2 px-6">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+<span class="font-label-sm">Terapkan Filter</span>
+</button>
+</section>
+<!-- Row 1: Calendar & Upcoming -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Left: Calendar -->
+<div class="lg:col-span-8 glass-card rounded-2xl p-6">
+<div class="flex justify-between items-center mb-6">
+<h2 class="font-h3 text-primary">Kalender Pelatihan</h2>
+<div class="flex gap-2">
+<button class="p-2 hover:bg-surface-container rounded-full"><span class="material-symbols-outlined" data-icon="chevron_left">chevron_left</span></button>
+<span class="font-h3">Mei 2024</span>
+<button class="p-2 hover:bg-surface-container rounded-full"><span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span></button>
+</div>
+</div>
+<div class="grid grid-cols-7 border-t border-l border-outline-variant/30">
+<!-- Calendar Header -->
+<div class="p-2 text-center font-label-sm text-on-surface-variant bg-slate-50/50 border-r border-b border-outline-variant/30">Sen</div>
+<div class="p-2 text-center font-label-sm text-on-surface-variant bg-slate-50/50 border-r border-b border-outline-variant/30">Sel</div>
+<div class="p-2 text-center font-label-sm text-on-surface-variant bg-slate-50/50 border-r border-b border-outline-variant/30">Rab</div>
+<div class="p-2 text-center font-label-sm text-on-surface-variant bg-slate-50/50 border-r border-b border-outline-variant/30">Kam</div>
+<div class="p-2 text-center font-label-sm text-on-surface-variant bg-slate-50/50 border-r border-b border-outline-variant/30">Jum</div>
+<div class="p-2 text-center font-label-sm text-on-surface-variant bg-slate-50/50 border-r border-b border-outline-variant/30">Sab</div>
+<div class="p-2 text-center font-label-sm text-on-surface-variant bg-slate-50/50 border-r border-b border-outline-variant/30 text-error">Min</div>
+<!-- Calendar Grid Mockup (Starts May 1) -->
+<div class="h-24 p-2 border-r border-b border-outline-variant/30 text-caption opacity-30">29</div>
+<div class="h-24 p-2 border-r border-b border-outline-variant/30 text-caption opacity-30">30</div>
+<div class="h-24 p-2 border-r border-b border-outline-variant/30 text-caption">1</div>
+<div class="h-24 p-2 border-r border-b border-outline-variant/30 text-caption">2</div>
+<div class="h-24 p-2 border-r border-b border-outline-variant/30 text-caption">3</div>
+<div class="h-24 p-2 border-r border-b border-outline-variant/30 text-caption">4</div>
+<div class="h-24 p-2 border-r border-b border-outline-variant/30 text-caption text-error">5</div>
+<div class="h-24 p-2 border-r border-b border-outline-variant/30 text-caption">6</div>
+<div class="h-24 p-2 border-r border-b border-outline-variant/30 text-caption">7</div>
+<div class="h-24 p-2 border-r border-b border-outline-variant/30 text-caption">8</div>
+<div class="h-24 p-2 border-r border-b border-outline-variant/30 text-caption">9</div>
+<!-- Multi-day Event -->
+<div class="h-24 p-1 border-r border-b border-outline-variant/30 text-caption relative bg-primary-container/10">
+<span class="absolute top-2 left-2">10</span>
+<div class="mt-6 bg-primary text-white text-[10px] p-1 rounded-sm truncate cursor-pointer z-10">Pelatihan PBJP Dasar...</div>
+</div>
+<div class="h-24 p-1 border-r border-b border-outline-variant/30 text-caption bg-primary-container/10">
+<span class="absolute top-2 left-2">11</span>
+<div class="mt-6 bg-primary text-white text-[10px] p-1 rounded-sm truncate">...Pelatihan PBJP Dasar...</div>
+</div>
+<div class="h-24 p-1 border-r border-b border-outline-variant/30 text-caption bg-primary-container/10">
+<span class="absolute top-2 left-2">12</span>
+<div class="mt-6 bg-primary text-white text-[10px] p-1 rounded-sm truncate">...Pelatihan PBJP Dasar</div>
+</div>
+<!-- More cells... -->
+<div class="h-24 p-2 border-r border-b border-outline-variant/30 text-caption">13</div>
+<div class="h-24 p-2 border-r border-b border-outline-variant/30 text-caption">14</div>
+<div class="h-24 p-2 border-r border-b border-outline-variant/30 text-caption">15</div>
+<div class="h-24 p-2 border-r border-b border-outline-variant/30 text-caption">16</div>
+<div class="h-24 p-1 border-r border-b border-outline-variant/30 text-caption relative">
+<span class="absolute top-2 left-2">17</span>
+<div class="mt-6 bg-secondary text-white text-[10px] p-1 rounded-sm truncate">Sertifikasi Ahli Muda</div>
+</div>
+<div class="h-24 p-2 border-r border-b border-outline-variant/30 text-caption">18</div>
+<div class="h-24 p-2 border-r border-b border-outline-variant/30 text-caption text-error">19</div>
+</div>
+</div>
+<!-- Right: Upcoming Trainings -->
+<div class="lg:col-span-4 space-y-gutter">
+<div class="glass-card rounded-2xl p-6">
+<h2 class="font-h3 text-primary mb-6">Jadwal Terdekat</h2>
+<div class="space-y-4">
+<div class="group p-4 rounded-xl border border-outline-variant/30 hover:border-primary/50 hover:bg-white transition-all cursor-pointer">
+<div class="flex justify-between items-start mb-2">
+<span class="bg-primary/10 text-primary px-2 py-1 rounded text-[10px] font-bold uppercase">PBJP DASAR</span>
+<span class="text-caption text-on-surface-variant">10 - 12 Mei</span>
+</div>
+<h4 class="font-label-sm text-blue-900 group-hover:text-primary transition-colors">Bimbingan Teknis PBJP Tingkat Dasar</h4>
+<div class="flex items-center gap-2 mt-3 text-caption text-slate-500">
+<span class="material-symbols-outlined text-[16px]" data-icon="location_on">location_on</span>
+<span>Hotel Borobudur, Jakarta</span>
+</div>
+</div>
+<div class="group p-4 rounded-xl border border-outline-variant/30 hover:border-primary/50 hover:bg-white transition-all cursor-pointer">
+<div class="flex justify-between items-start mb-2">
+<span class="bg-secondary/10 text-secondary px-2 py-1 rounded text-[10px] font-bold uppercase">SERTIFIKASI</span>
+<span class="text-caption text-on-surface-variant">17 Mei</span>
+</div>
+<h4 class="font-label-sm text-blue-900 group-hover:text-primary transition-colors">Ujian Sertifikasi Ahli Pengadaan</h4>
+<div class="flex items-center gap-2 mt-3 text-caption text-slate-500">
+<span class="material-symbols-outlined text-[16px]" data-icon="videocam">videocam</span>
+<span>Online via Zoom</span>
+</div>
+</div>
+<div class="group p-4 rounded-xl border border-outline-variant/30 hover:border-primary/50 hover:bg-white transition-all cursor-pointer">
+<div class="flex justify-between items-start mb-2">
+<span class="bg-tertiary-container/10 text-tertiary px-2 py-1 rounded text-[10px] font-bold uppercase">KONTRAK</span>
+<span class="text-caption text-on-surface-variant">22 - 24 Mei</span>
+</div>
+<h4 class="font-label-sm text-blue-900 group-hover:text-primary transition-colors">Workshop Manajemen Kontrak Konstruksi</h4>
+<div class="flex items-center gap-2 mt-3 text-caption text-slate-500">
+<span class="material-symbols-outlined text-[16px]" data-icon="location_on">location_on</span>
+<span>Gedung LKPP Lt. 2, Jakarta</span>
+</div>
+</div>
+</div>
+<button class="w-full mt-6 py-3 border border-primary text-primary font-label-sm rounded-lg hover:bg-primary hover:text-white transition-all">Lihat Semua Jadwal</button>
+</div>
+<!-- Stats/Quick Info -->
+<div class="bg-primary-container text-on-primary-container rounded-2xl p-6 relative overflow-hidden">
+<div class="relative z-10">
+<div class="text-3xl font-bold mb-1">12</div>
+<div class="text-label-sm opacity-80 uppercase tracking-wider">Pelatihan Aktif Bulan Ini</div>
+</div>
+<div class="absolute -right-4 -bottom-4 opacity-10">
+<span class="material-symbols-outlined text-[120px]" data-icon="school">school</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Row 2: Data Table -->
+<section class="glass-card rounded-2xl overflow-hidden">
+<div class="p-6 border-b border-outline-variant/30 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+<h2 class="font-h3 text-primary">Daftar Pelatihan Lengkap</h2>
+<div class="flex flex-wrap gap-2 w-full md:w-auto">
+<div class="relative flex-1 md:w-64">
+<input class="w-full pl-10 pr-4 py-2 bg-slate-50 border-outline-variant rounded-lg focus:ring-primary focus:border-primary text-body-md" placeholder="Cari pelatihan..." type="text"/>
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-slate-400 text-[20px]" data-icon="search">search</span>
+</div>
+<div class="flex gap-2">
+<button class="p-2 border border-outline-variant rounded-lg hover:bg-slate-100"><span class="material-symbols-outlined text-[20px]" data-icon="description">description</span></button>
+<button class="p-2 border border-outline-variant rounded-lg hover:bg-slate-100"><span class="material-symbols-outlined text-[20px]" data-icon="picture_as_pdf">picture_as_pdf</span></button>
+<button class="p-2 border border-outline-variant rounded-lg hover:bg-slate-100"><span class="material-symbols-outlined text-[20px]" data-icon="print">print</span></button>
+</div>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead class="bg-slate-50/50 font-label-sm text-on-surface-variant border-b border-outline-variant/30">
+<tr>
+<th class="px-6 py-4">No <span class="material-symbols-outlined text-[12px]" data-icon="unfold_more">unfold_more</span></th>
+<th class="px-6 py-4">Nama Pelatihan</th>
+<th class="px-6 py-4">Jenis</th>
+<th class="px-6 py-4">Sisa Kuota</th>
+<th class="px-6 py-4">Waktu</th>
+<th class="px-6 py-4">Lokasi</th>
+<th class="px-6 py-4">Status</th>
+<th class="px-6 py-4 text-center">Action</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/30">
+<tr class="hover:bg-primary-container/5 transition-colors group cursor-pointer">
+<td class="px-6 py-4 text-caption text-slate-500">1</td>
+<td class="px-6 py-4 font-label-sm text-blue-900">Pelatihan Kompetensi PPK Tipe C</td>
+<td class="px-6 py-4"><span class="bg-surface-container-high text-on-surface-variant px-2 py-1 rounded text-[10px] font-bold">KOMPETENSI</span></td>
+<td class="px-6 py-4 w-40">
+<div class="flex flex-col gap-1">
+<div class="flex justify-between text-[10px] font-bold"><span>15/30</span><span>50%</span></div>
+<div class="w-full bg-slate-200 h-1.5 rounded-full overflow-hidden">
+<div class="bg-secondary h-full" style="width: 50%"></div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-caption">10 - 15 Juni 2024</td>
+<td class="px-6 py-4 text-caption">Jakarta</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-100 text-secondary text-[11px] font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span> BUKA
+                                </span>
+</td>
+<td class="px-6 py-4 text-center">
+<button class="bg-primary/10 text-primary hover:bg-primary hover:text-white px-4 py-1.5 rounded-lg text-caption font-bold transition-all">Detail</button>
+</td>
+</tr>
+<tr class="hover:bg-primary-container/5 transition-colors group cursor-pointer">
+<td class="px-6 py-4 text-caption text-slate-500">2</td>
+<td class="px-6 py-4 font-label-sm text-blue-900">Pemanfaatan E-Katalog Versi 6.0</td>
+<td class="px-6 py-4"><span class="bg-surface-container-high text-on-surface-variant px-2 py-1 rounded text-[10px] font-bold">WORKSHOP</span></td>
+<td class="px-6 py-4 w-40">
+<div class="flex flex-col gap-1">
+<div class="flex justify-between text-[10px] font-bold"><span>2/50</span><span>4%</span></div>
+<div class="w-full bg-slate-200 h-1.5 rounded-full overflow-hidden">
+<div class="bg-error h-full" style="width: 96%"></div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-caption">20 Juni 2024</td>
+<td class="px-6 py-4 text-caption">Online</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-orange-100 text-orange-700 text-[11px] font-bold">
+                                    TERBATAS
+                                </span>
+</td>
+<td class="px-6 py-4 text-center">
+<button class="bg-primary/10 text-primary hover:bg-primary hover:text-white px-4 py-1.5 rounded-lg text-caption font-bold transition-all">Detail</button>
+</td>
+</tr>
+<tr class="hover:bg-primary-container/5 transition-colors group cursor-pointer opacity-70">
+<td class="px-6 py-4 text-caption text-slate-500">3</td>
+<td class="px-6 py-4 font-label-sm text-blue-900">Sertifikasi Ahli Pengadaan Dasar</td>
+<td class="px-6 py-4"><span class="bg-surface-container-high text-on-surface-variant px-2 py-1 rounded text-[10px] font-bold">SERTIFIKASI</span></td>
+<td class="px-6 py-4 w-40">
+<div class="flex flex-col gap-1">
+<div class="flex justify-between text-[10px] font-bold"><span>PENUH</span><span>100%</span></div>
+<div class="w-full bg-slate-200 h-1.5 rounded-full overflow-hidden">
+<div class="bg-slate-500 h-full" style="width: 100%"></div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-caption">05 Juni 2024</td>
+<td class="px-6 py-4 text-caption">Semarang</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-500 text-[11px] font-bold">
+                                    TUTUP
+                                </span>
+</td>
+<td class="px-6 py-4 text-center">
+<button class="bg-slate-100 text-slate-400 px-4 py-1.5 rounded-lg text-caption font-bold cursor-not-allowed">Detail</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-6 bg-slate-50/50 flex justify-between items-center border-t border-outline-variant/30">
+<span class="text-caption text-on-surface-variant">Menampilkan 1 - 3 dari 12 entri</span>
+<div class="flex gap-1">
+<button class="p-2 rounded hover:bg-white border border-outline-variant/30 text-caption disabled:opacity-50">Prev</button>
+<button class="w-8 h-8 flex items-center justify-center rounded bg-primary text-white text-caption">1</button>
+<button class="w-8 h-8 flex items-center justify-center rounded hover:bg-white border border-outline-variant/30 text-caption">2</button>
+<button class="w-8 h-8 flex items-center justify-center rounded hover:bg-white border border-outline-variant/30 text-caption">3</button>
+<button class="p-2 rounded hover:bg-white border border-outline-variant/30 text-caption">Next</button>
+</div>
+</div>
+</section>
+</main>
+<!-- Modal Backdrop -->
+<div class="fixed inset-0 bg-on-surface/40 backdrop-blur-sm z-[100] flex items-center justify-center p-4">
+<!-- Modal Content -->
+<div class="bg-white rounded-2xl w-full max-w-2xl overflow-hidden shadow-2xl flex flex-col">
+<div class="p-6 border-b border-outline-variant/30 flex justify-between items-center bg-surface-container-low">
+<div>
+<span class="text-caption font-bold text-primary uppercase tracking-widest">Detail Pelatihan</span>
+<h3 class="font-h3 text-blue-900 mt-1">Bimbingan Teknis PBJP Tingkat Dasar</h3>
+</div>
+<button class="p-2 hover:bg-white rounded-full transition-colors"><span class="material-symbols-outlined" data-icon="close">close</span></button>
+</div>
+<div class="p-8 overflow-y-auto max-h-[716px] space-y-8">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="space-y-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="calendar_month">calendar_month</span>
+</div>
+<div>
+<div class="text-[10px] text-on-surface-variant font-bold uppercase">Tanggal</div>
+<div class="text-body-md font-semibold">10 - 12 Mei 2024</div>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="location_on">location_on</span>
+</div>
+<div>
+<div class="text-[10px] text-on-surface-variant font-bold uppercase">Lokasi</div>
+<div class="text-body-md font-semibold">Hotel Borobudur, Jakarta</div>
+</div>
+</div>
+</div>
+<div class="space-y-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+</div>
+<div>
+<div class="text-[10px] text-on-surface-variant font-bold uppercase">Sisa Kuota</div>
+<div class="text-body-md font-semibold">12 Orang</div>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+</div>
+<div>
+<div class="text-[10px] text-on-surface-variant font-bold uppercase">Biaya</div>
+<div class="text-body-md font-semibold">Gratis (Subsidi LKPP)</div>
+</div>
+</div>
+</div>
+</div>
+<div>
+<h4 class="font-label-sm mb-2">Deskripsi Pelatihan</h4>
+<p class="text-body-md text-on-surface-variant">Pelatihan ini dirancang untuk memberikan pemahaman menyeluruh mengenai siklus pengadaan barang/jasa pemerintah sesuai dengan Perpres terbaru. Materi mencakup perencanaan, persiapan, pelaksanaan, hingga pengawasan pengadaan.</p>
+</div>
+<div class="pt-6 border-t border-outline-variant/30">
+<h4 class="font-h3 mb-6 text-blue-900">Formulir Pendaftaran</h4>
+<form class="space-y-6">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="col-span-full">
+<label class="block font-label-sm mb-2">Status Peserta</label>
+<div class="flex gap-4">
+<label class="flex items-center gap-2 cursor-pointer">
+<input checked="" class="text-primary focus:ring-primary border-outline-variant" name="status" type="radio" value="Penyedia"/>
+<span class="text-body-md">Penyedia</span>
+</label>
+<label class="flex items-center gap-2 cursor-pointer">
+<input class="text-primary focus:ring-primary border-outline-variant" name="status" type="radio" value="Non Penyedia"/>
+<span class="text-body-md">Non Penyedia (ASN/Lembaga)</span>
+</label>
+</div>
+</div>
+<!-- Conditional Fields (Simulated as Visible) -->
+<div class="space-y-4 col-span-full border-l-4 border-primary/20 pl-4 py-2 bg-slate-50/50 rounded-r-lg">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div>
+<label class="block font-label-sm mb-2">Nama Perusahaan</label>
+<input class="w-full bg-white border-outline-variant rounded-lg focus:ring-primary focus:border-primary text-body-md" placeholder="PT. Nama Perusahaan" type="text"/>
+</div>
+<div>
+<label class="block font-label-sm mb-2">NPWP</label>
+<input class="w-full bg-white border-outline-variant rounded-lg focus:ring-primary focus:border-primary text-body-md" placeholder="00.000.000.0-000.000" type="text"/>
+</div>
+</div>
+</div>
+</div>
+<div class="flex justify-end gap-3 pt-4">
+<button class="px-6 py-2.5 font-label-sm text-on-surface-variant hover:bg-slate-100 rounded-lg transition-colors" type="button">Batal</button>
+<button class="bg-primary text-white px-8 py-2.5 rounded-lg font-label-sm hover:bg-primary-container transition-all flex items-center gap-2" type="submit">
+<div class="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin hidden"></div>
+<span>Daftar Sekarang</span>
+</button>
+</div>
+</form>
+</div>
+</div>
+</div>
+</div>
+<!-- Success Toast Mockup -->
+<div class="fixed bottom-10 right-10 z-[200] transform translate-y-0 opacity-100">
+<div class="bg-secondary text-white px-6 py-4 rounded-xl shadow-2xl flex items-center gap-4 border border-secondary-fixed">
+<div class="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div>
+<div class="font-bold">Data Terdaftar!</div>
+<div class="text-[12px] opacity-80">Email konfirmasi telah dikirim ke alamat Anda.</div>
+</div>
+<button class="ml-4 opacity-50 hover:opacity-100"><span class="material-symbols-outlined text-[18px]" data-icon="close">close</span></button>
+</div>
+</div>
+<!-- Footer -->
+<footer class="w-full border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 font-['Plus_Jakarta_Sans'] text-xs uppercase tracking-widest flex flex-col md:flex-row justify-between items-center px-12 py-8 gap-4 mt-stack-lg">
+<div class="flex flex-col md:flex-row items-center gap-8">
+<span class="font-bold text-slate-900 dark:text-white">LAB LPSE</span>
+<div class="flex gap-6 text-slate-500 dark:text-slate-500">
+<a class="hover:text-blue-700 dark:hover:text-blue-300" href="#">Accessibility</a>
+<a class="hover:text-blue-700 dark:hover:text-blue-300" href="#">Privacy Policy</a>
+<a class="hover:text-blue-700 dark:hover:text-blue-300" href="#">Security</a>
+<a class="hover:text-blue-700 dark:hover:text-blue-300" href="#">User Guide</a>
+</div>
+</div>
+<span class="text-slate-500 dark:text-slate-500 text-center md:text-right">© 2024 LAB LPSE GOVERNMENT PROCUREMENT. TRANSPARENT TRAINING SYSTEMS.</span>
+</footer>
+</body></html>

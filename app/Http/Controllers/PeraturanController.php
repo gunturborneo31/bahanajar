@@ -13,7 +13,10 @@ class PeraturanController extends Controller
     public function index()
     {
         // Ambil semua artikel dengan inaproc_jenis = 'Peraturan'
-        $articles = DB::table('articles')->where('inaproc_jenis', 'Peraturan')->get();
+        $articles = DB::table('articles')
+            ->where('inaproc_jenis', 'Peraturan')
+            ->select('*', DB::raw('COALESCE(inaproc_kategori, inaproc_category, scraped_jenis) as inaproc_kategori'))
+            ->get();
         return view('pages.peraturan', compact('articles'));
     }
 
