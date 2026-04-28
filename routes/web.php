@@ -19,9 +19,14 @@ Route::get('/peraturan/{id}', [PeraturanController::class, 'show'])->name('perat
 Route::get('/dokumen', [DokumenController::class, 'index'])->name('dokumen');
 Route::get('/dokumen/{id}', [DokumenController::class, 'show'])->name('dokumen.detail');
 
-// Materi
-Route::get('/materi', fn() => view('pages.materi'))->name('materi');
-Route::get('/materi/{slug}', fn($slug) => view('pages.materi-detail', compact('slug')))->name('materi.detail');
+// Panduan
+use App\Http\Controllers\PanduanController;
+Route::get('/panduan', [PanduanController::class, 'index'])->name('panduan');
+Route::get('/panduan/{slug}', fn($slug) => view('pages.panduan-detail', compact('slug')))->name('panduan.detail');
+
+// FAQ
+use App\Http\Controllers\FaqController;
+Route::get('/faq', [FaqController::class, 'index'])->name('faq');
 
 // Lab LPSE
 Route::get('/lab-lpse', function (\Illuminate\Http\Request $request) {

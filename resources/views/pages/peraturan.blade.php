@@ -10,6 +10,7 @@
         search: '',
         articles: window.articles,
         kategori: '',
+        viewMode: 'grid',
         kategoriList: (() => {
             const kategoriMap = {};
             window.articles.filter(a => a.inaproc_jenis === 'Peraturan' && a.inaproc_kategori).forEach(a => {
@@ -47,10 +48,10 @@
             </select>
             {{-- Grid/List Toggle --}}
             <div class="flex gap-1 ml-auto">
-                <button @click="viewMode = 'grid'" :class="viewMode==='grid' ? 'bg-[#DC2626] text-white' : 'bg-[#F3F4F6] text-[#374151]'" class="p-2 rounded-lg transition-all" title="Tampilan Grid">
+                <button @click="viewMode = 'grid'" :class="viewMode==='grid' ? 'bg-[#DC2626] text-white ring-2 ring-[#DC2626] shadow-md' : 'bg-[#F3F4F6] text-[#374151]'" class="p-2 rounded-lg transition-all" title="Tampilan Grid">
                     <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><rect x="4" y="4" width="7" height="7" rx="2" fill="currentColor"/><rect x="13" y="4" width="7" height="7" rx="2" fill="currentColor"/><rect x="4" y="13" width="7" height="7" rx="2" fill="currentColor"/><rect x="13" y="13" width="7" height="7" rx="2" fill="currentColor"/></svg>
                 </button>
-                <button @click="viewMode = 'list'" :class="viewMode==='list' ? 'bg-[#DC2626] text-white' : 'bg-[#F3F4F6] text-[#374151]'" class="p-2 rounded-lg transition-all" title="Tampilan List">
+                <button @click="viewMode = 'list'" :class="viewMode==='list' ? 'bg-[#DC2626] text-white ring-2 ring-[#DC2626] shadow-md' : 'bg-[#F3F4F6] text-[#374151]'" class="p-2 rounded-lg transition-all" title="Tampilan List">
                     <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><rect x="4" y="6" width="16" height="2" rx="1" fill="currentColor"/><rect x="4" y="11" width="16" height="2" rx="1" fill="currentColor"/><rect x="4" y="16" width="16" height="2" rx="1" fill="currentColor"/></svg>
                 </button>
             </div>
@@ -81,20 +82,13 @@
         </aside>
 
         {{-- Konten kanan: Daftar artikel peraturan --}}
-        <main class="flex-1 min-w-0" x-data="{ viewMode: 'grid' }">
+        <main class="flex-1 min-w-0">
             <!-- Breadcrumbs -->
             <nav class="flex text-sm text-[#6B7280] mb-4" aria-label="Breadcrumb">
                 <ol class="inline-flex items-center space-x-1 md:space-x-2">
-                    <li class="inline-flex items-center">
-                        <a href="/" class="text-[#DC2626] hover:underline">Home</a>
-                    </li>
-                    <li>
-                        <span class="mx-2">/</span>
-                        <a href="/peraturan" class="text-[#DC2626] hover:underline">Peraturan</a>
-                    </li>
+                        
                     <template x-if="kategori">
                         <li>
-                            <span class="mx-2">/</span>
                             <button @click="selectedArticle = null" class="text-[#DC2626] hover:underline focus:outline-none" x-text="kategori"></button>
                         </li>
                     </template>
@@ -156,11 +150,11 @@
                                 </div>
                             </template>
                             <template x-if="viewMode==='list'">
-                                <ul class="divide-y divide-[#E5E7EB] dark:divide-[#374151]">
+                                <ul>
                                     <template x-for="article in filteredArticles" :key="article.id">
-                                        <li>
+                                        <li class="bg-white dark:bg-[#1F2937] rounded-xl shadow-sm mb-4 p-0 transition-all">
                                             <button @click="selectedArticle = article"
-                                                class="w-full text-left px-4 py-3 bg-transparent hover:bg-[#FEF2F2] dark:hover:bg-[#7F1D1D]/20 text-sm font-semibold transition-all duration-150"
+                                                class="w-full text-left px-4 py-3 bg-transparent hover:bg-[#FEF2F2] dark:hover:bg-[#7F1D1D]/20 text-sm font-semibold rounded-xl transition-all duration-150"
                                                 :class="'text-[#374151] dark:text-[#D1D5DB]'">
                                                 <span x-text="article.title"></span>
                                             </button>
