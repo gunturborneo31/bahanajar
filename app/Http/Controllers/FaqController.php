@@ -10,28 +10,36 @@ class FaqController extends Controller
 {
     public function index(Request $request)
     {
-        // Ambil root kategori (jenis FAQ)
-        $roots = \App\Models\FaqCategory::with(['children.children.articles'])->whereNull('parent_id')->orderBy('urutan')->get();
+        // Ambil data FAQ dari tabel articles
+        $articles = \App\Models\Article::select(['id', 'inaproc_category', 'inaproc_jenis', 'inaproc_kategori', 'title', 'content'])
+            ->whereNotNull('inaproc_category')
+            ->orderBy('inaproc_category')
+            ->orderBy('inaproc_jenis')
+            ->orderBy('inaproc_kategori')
+            ->orderBy('title')
+            ->get();
 
+        // Susun struktur: kategori > sub1 > sub2 > artikel
         $hierarchy = [];
-        foreach ($roots as $root) {
-            $jenis = $root->name;
-            $hierarchy[$jenis] = [];
-            foreach ($root->children as $kategori) {
-                $kategoriName = $kategori->name;
-                $hierarchy[$jenis][$kategoriName] = [];
-                foreach ($kategori->children as $subkategori) {
-                    $subkategoriName = $subkategori->name;
-                    $hierarchy[$jenis][$kategoriName][$subkategoriName] = [];
-                    foreach ($subkategori->articles as $article) {
-                        $hierarchy[$jenis][$kategoriName][$subkategoriName][] = [
-                            'id' => $article->id,
-                            'title' => $article->title ?? '-',
-                            'content' => $article->content ?? '',
-                        ];
-                    }
-                }
+        foreach ($articles as $article) {
+            // Ambil bagian setelah 'FAQ ' jika ada, contoh: 'FAQ PENYEDIA' -> 'PENYEDIA'
+            $kategori = $article->inaproc_category ? trim(preg_replace('/^FAQ\s+/i', '', $article->inaproc_category)) : 'Lainnya';
+            $sub1 = $article->inaproc_jenis ?: 'Lainnya';
+            $sub2 = $article->inaproc_kategori ?: 'Lainnya';
+            if (!isset($hierarchy[$kategori])) {
+                $hierarchy[$kategori] = [];
             }
+            if (!isset($hierarchy[$kategori][$sub1])) {
+                $hierarchy[$kategori][$sub1] = [];
+            }
+            if (!isset($hierarchy[$kategori][$sub1][$sub2])) {
+                $hierarchy[$kategori][$sub1][$sub2] = [];
+            }
+            $hierarchy[$kategori][$sub1][$sub2][] = [
+                'id' => $article->id,
+                'title' => $article->title,
+                'content' => $article->content,
+            ];
         }
 
         return view('pages.faq', [

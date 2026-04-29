@@ -29,6 +29,7 @@ use App\Http\Controllers\FaqController;
 Route::get('/faq', [FaqController::class, 'index'])->name('faq');
 
 // Lab LPSE
+use Illuminate\Support\Carbon;
 Route::get('/lab-lpse', function (\Illuminate\Http\Request $request) {
     $query = Pelatihan::query();
     if ($request->filled('search')) {
@@ -51,9 +52,23 @@ Route::get('/lab-lpse', function (\Illuminate\Http\Request $request) {
     if ($request->filled('metode')) {
         $query->where('metode', $request->input('metode'));
     }
-    $query->orderByDesc('created_at');
+    // Hanya pelatihan yang akan datang
+    $query->where('tanggal_mulai', '>=', Carbon::today());
+    $query->orderBy('tanggal_mulai');
     $pelatihans = $query->paginate(10)->withQueryString();
-    return view('pages.lab-lpse', compact('pelatihans'));
+
+    // Data event kalender (semua pelatihan akan datang)
+    $events = [];
+    foreach (Pelatihan::where('tanggal_mulai', '>=', Carbon::today())->get() as $p) {
+        $events[] = [
+            'id' => $p->id,
+            'title' => $p->nama,
+            'start' => $p->tanggal_mulai,
+            'end' => $p->tanggal_selesai > $p->tanggal_mulai ? Carbon::parse($p->tanggal_selesai)->addDay()->format('Y-m-d') : null,
+            'color' => $p->jenis === 'SERTIFIKASI' ? '#16a34a' : ($p->jenis === 'PBJP DASAR' ? '#2563eb' : '#b91c1c'),
+        ];
+    }
+    return view('pages.lab-lpse', compact('pelatihans', 'events'));
 })->name('lab-lpse');
 
 // Halaman statis

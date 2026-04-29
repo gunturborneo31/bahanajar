@@ -29,7 +29,7 @@
 @endif
 
 
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 mb-24">
     <!-- Hero Section -->
     <section class="mb-12 mt-12">
         <div class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#dc2626] to-[#b91c1c] p-10 md:p-16 text-white shadow-xl flex flex-col md:flex-row items-center gap-8 font-['Inter','Plus_Jakarta_Sans',sans-serif]">
@@ -175,43 +175,76 @@
                 document.addEventListener('DOMContentLoaded', function() {
                     var calendarEl = document.getElementById('calendar');
                     if (calendarEl) {
+                        // Data event dari backend
+                        var events = @json($events ?? []);
                         var calendar = new FullCalendar.Calendar(calendarEl, {
                             initialView: 'dayGridMonth',
                             headerToolbar: {
                                 left: 'prev,next today',
                                 center: 'title',
-                                right: 'dayGridMonth,timeGridWeek,listWeek'
+                                right: '' // hanya month
                             },
                             height: 540,
                             selectable: true,
                             editable: false,
-                            events: [
-                                {
-                                    title: 'Pelatihan PBJP Dasar',
-                                    start: '2024-05-10',
-                                    end: '2024-05-13',
-                                    color: '#2563eb',
-                                },
-                                {
-                                    title: 'Sertifikasi Ahli Pengadaan',
-                                    start: '2024-05-17',
-                                    color: '#16a34a',
-                                },
-                                {
-                                    title: 'Workshop Manajemen Kontrak',
-                                    start: '2024-05-22',
-                                    end: '2024-05-25',
-                                    color: '#b91c1c',
-                                }
-                            ],
+                            events: events,
                             eventClick: function(info) {
-                                // Tampilkan modal detail pelatihan
-                                let modal = document.querySelector('.z-[100]');
-                                if (modal) modal.style.display = 'flex';
+                                // Tampilkan daftar pelatihan pada tanggal yang diklik
+                                var date = info.event.startStr;
+                                showPelatihanListByDate(date);
+                            },
+                            dateClick: function(info) {
+                                // Jika klik tanggal kosong, tampilkan semua pelatihan di tanggal tsb
+                                showPelatihanListByDate(info.dateStr);
                             }
                         });
                         calendar.render();
                     }
+
+                    // Handler tampilkan daftar pelatihan pada tanggal tertentu
+                    window.showPelatihanListByDate = function(dateStr) {
+                        // Ambil semua event pada tanggal tsb
+                        var events = @json($events ?? []);
+                        var list = events.filter(function(ev) {
+                            // Cek apakah dateStr di range event
+                            var start = new Date(ev.start);
+                            var end = ev.end ? new Date(ev.end) : start;
+                            var target = new Date(dateStr);
+                            // end exclusive
+                            return target >= start && target < end;
+                        });
+                        if (list.length === 0) {
+                            alert('Tidak ada pelatihan pada tanggal ini.');
+                            return;
+                        }
+                        var html = '<div style="max-width:400px;padding:24px 16px;">';
+                        html += '<h3 class="font-bold mb-4 text-lg text-primary">Pelatihan pada ' + dateStr + '</h3>';
+                        html += '<ul class="space-y-2">';
+                        list.forEach(function(ev) {
+                            html += '<li class="p-3 rounded-lg bg-slate-50 border-l-4 border-primary mb-2">'
+                                + '<div class="font-semibold">' + ev.title + '</div>'
+                                + '</li>';
+                        });
+                        html += '</ul>';
+                        html += '<div class="mt-4 text-right"><button onclick="closePelatihanModal()" class="px-4 py-2 rounded-lg bg-primary text-white">Tutup</button></div>';
+                        html += '</div>';
+                        showPelatihanModal(html);
+                    };
+                    window.showPelatihanModal = function(html) {
+                        var modal = document.getElementById('calendar-modal');
+                        if (!modal) {
+                            modal = document.createElement('div');
+                            modal.id = 'calendar-modal';
+                            modal.className = 'fixed inset-0 bg-black/40 flex items-center justify-center z-[200]';
+                            document.body.appendChild(modal);
+                        }
+                        modal.innerHTML = '<div class="bg-white rounded-2xl shadow-xl">' + html + '</div>';
+                        modal.style.display = 'flex';
+                    };
+                    window.closePelatihanModal = function() {
+                        var modal = document.getElementById('calendar-modal');
+                        if (modal) modal.style.display = 'none';
+                    };
                 });
             </script>
         @endpush

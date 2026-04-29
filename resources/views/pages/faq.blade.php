@@ -6,10 +6,10 @@
     {{-- Tombol Jenis FAQ di halaman awal --}}
     <template x-if="!selectedJenis">
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mb-8">
-            <button @click="selectedJenis = 'FAQ PENYEDIA'" class="w-full py-8 rounded-xl shadow-sm bg-white dark:bg-[#1F2937] border border-[#E5E7EB] dark:border-[#374151] text-lg font-bold text-[#DC2626] hover:bg-[#FEF2F2] dark:hover:bg-[#7F1D1D]/20 transition-all">FAQ PENYEDIA</button>
-            <button @click="selectedJenis = 'FAQ PP/PPK'" class="w-full py-8 rounded-xl shadow-sm bg-white dark:bg-[#1F2937] border border-[#E5E7EB] dark:border-[#374151] text-lg font-bold text-[#DC2626] hover:bg-[#FEF2F2] dark:hover:bg-[#7F1D1D]/20 transition-all">FAQ PP/PPK</button>
-            <button @click="selectedJenis = 'FAQ AUDITOR'" class="w-full py-8 rounded-xl shadow-sm bg-white dark:bg-[#1F2937] border border-[#E5E7EB] dark:border-[#374151] text-lg font-bold text-[#DC2626] hover:bg-[#FEF2F2] dark:hover:bg-[#7F1D1D]/20 transition-all">FAQ AUDITOR</button>
-            <button @click="selectedJenis = 'FAQ BENDAHARA'" class="w-full py-8 rounded-xl shadow-sm bg-white dark:bg-[#1F2937] border border-[#E5E7EB] dark:border-[#374151] text-lg font-bold text-[#DC2626] hover:bg-[#FEF2F2] dark:hover:bg-[#7F1D1D]/20 transition-all">FAQ BENDAHARA</button>
+            <button @click="selectedJenis = 'Penyedia'" class="w-full py-8 rounded-xl shadow-sm bg-white dark:bg-[#1F2937] border border-[#E5E7EB] dark:border-[#374151] text-lg font-bold text-[#DC2626] hover:bg-[#FEF2F2] dark:hover:bg-[#7F1D1D]/20 transition-all">PENYEDIA</button>
+            <button @click="selectedJenis = 'PP/PPK'" class="w-full py-8 rounded-xl shadow-sm bg-white dark:bg-[#1F2937] border border-[#E5E7EB] dark:border-[#374151] text-lg font-bold text-[#DC2626] hover:bg-[#FEF2F2] dark:hover:bg-[#7F1D1D]/20 transition-all">PP/PPK</button>
+            <button @click="selectedJenis = 'Auditor'" class="w-full py-8 rounded-xl shadow-sm bg-white dark:bg-[#1F2937] border border-[#E5E7EB] dark:border-[#374151] text-lg font-bold text-[#DC2626] hover:bg-[#FEF2F2] dark:hover:bg-[#7F1D1D]/20 transition-all">AUDITOR</button>
+            <button @click="selectedJenis = 'Bendahara'" class="w-full py-8 rounded-xl shadow-sm bg-white dark:bg-[#1F2937] border border-[#E5E7EB] dark:border-[#374151] text-lg font-bold text-[#DC2626] hover:bg-[#FEF2F2] dark:hover:bg-[#7F1D1D]/20 transition-all">BENDAHARA</button>
         </div>
     </template>
 
@@ -39,7 +39,7 @@
                                                 <li>
                                                     <button @click="selectedSubkategori = sub; selectedArticle = null"
                                                         class="w-full flex items-center justify-between px-3 py-2 rounded-lg text-xs font-normal transition-all duration-150 hover:bg-[#FEF2F2] dark:hover:bg-[#7F1D1D]/10 hover:text-[#DC2626] focus:outline-none"
-                                                        :class="selectedSubkategori === sub ? 'bg-[#FEE2E2] dark:bg-[#7F1D1D]/10 text-[#DC2626]' : 'text-[#374151] dark:text-[#D1D5DB] bg-transparent'">
+                                                        :class="selectedSubkategori === sub ? 'bg-[#FEF2F2] dark:bg-[#7F1D1D]/10 text-[#DC2626]' : 'text-[#374151] dark:text-[#D1D5DB] bg-transparent'">
                                                         <span x-text="sub" class="block text-left w-full"></span>
                                                         <span class="text-xs bg-[#F3F4F6] dark:bg-[#374151] text-[#6B7280] px-2 py-0.5 rounded-full" x-text="hierarchy[selectedJenis][kategori][sub].length"></span>
                                                     </button>
@@ -58,33 +58,32 @@
             <main class="flex-1 min-w-0">
                 <!-- Breadcrumbs -->
                 <nav class="flex text-sm text-[#6B7280] mb-4" aria-label="Breadcrumb">
-                    <ol class="inline-flex items-center space-x-1 md:space-x-2">
-                        
+                    <ol class="flex flex-wrap items-center space-x-1 md:space-x-2 break-all">
                         <li>
                             <a href="/faq" class="text-[#DC2626] hover:underline">FAQ</a>
                         </li>
                         <template x-if="selectedJenis">
                             <li>
                                 <span class="mx-2">/</span>
-                                <button @click="selectedKategori = ''; selectedSubkategori = ''; selectedArticle = null" class="text-[#DC2626] hover:underline focus:outline-none" x-text="selectedJenis"></button>
+                                <button @click="selectedKategori = ''; selectedSubkategori = ''; selectedArticle = null" class="text-[#DC2626] hover:underline focus:outline-none break-all" x-text="selectedJenis"></button>
                             </li>
                         </template>
                         <template x-if="selectedKategori">
                             <li>
                                 <span class="mx-2">/</span>
-                                <button @click="selectedSubkategori = ''; selectedArticle = null" class="text-[#DC2626] hover:underline focus:outline-none" x-text="selectedKategori"></button>
+                                <button @click="selectedSubkategori = ''; selectedArticle = null" class="text-[#DC2626] hover:underline focus:outline-none break-all" x-text="selectedKategori"></button>
                             </li>
                         </template>
                         <template x-if="selectedSubkategori">
                             <li>
                                 <span class="mx-2">/</span>
-                                <button @click="selectedArticle = null" class="text-[#DC2626] hover:underline focus:outline-none" x-text="selectedSubkategori"></button>
+                                <button @click="selectedArticle = null" class="text-[#DC2626] hover:underline focus:outline-none break-all" x-text="selectedSubkategori"></button>
                             </li>
                         </template>
                         <template x-if="selectedArticle">
                             <li>
                                 <span class="mx-2">/</span>
-                                <span class="font-semibold text-[#111827] dark:text-white" x-text="selectedArticle.title"></span>
+                                <span class="font-semibold text-[#111827] dark:text-white break-all" x-text="selectedArticle.title"></span>
                             </li>
                         </template>
                     </ol>
