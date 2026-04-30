@@ -5,7 +5,7 @@ use App\Models\FaqCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-// npm build
+// npm build again
 class FaqController extends Controller
 {
     public function index(Request $request)
